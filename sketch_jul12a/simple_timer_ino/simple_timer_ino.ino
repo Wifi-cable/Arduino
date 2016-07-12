@@ -23,7 +23,35 @@ void loop(){
   digitalWrite(led1, LOW);  //8
   delay (1000);      
   
-  digitalWrite(led8, LOW)   //7
-  digitalWrite(led4, HIGH)  
-  digitalWrite(led2, HIGH)
+  digitalWrite(led8, LOW);   //7
+  digitalWrite(led4, HIGH);  
+  digitalWrite(led2, HIGH);
+  digitalWrite(led1, HIGH);
+  delay (1000);
+  
+  digitalWrite(led1, LOW);  //6
+  delay (1000);
+  
+  digitalWrite(led2, LOW);//5
+  digitalWrite(led1, HIGH);
+  delay (1000);
+  
+  digitalWrite(led1, LOW); //4
+  delay (1000);
+  
+  digitalWrite(led4, LOW);//3
+  digitalWrite(led2, HIGH);
+  digitalWrite(led1, HIGH);
+  delay(1000);
+  
+  digitalWrite(led1, LOW);  //2
+  delay(1000);
+  
+  digitalWrite(led2, LOW); //1
+  digitalWrite(led1, HIGH);
+  delay(1000);
+  
+  digitalWrite(led0, HIGH);
+  delay(4000);
+  digitalWrite(led0, LOW);
  }
