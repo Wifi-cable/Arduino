@@ -20,12 +20,12 @@ void loop(){ // sollte blinken. aber blinken war nicht das ziel
   int k = 0;
   
   if (J==0){
-    digitalWrite(led0; HIGH);
+    digitalWrite(led0, HIGH);
     delay (2000);
   }
     else{ 
       if (j>=8){
-        digitalWrite(led8; HIGH)
+        digitalWrite(led8, HIGH);
         delay(1000);
      int i =j%2;
      int k= j/2;// gut und jetzt die richtien leuchten...
@@ -34,3 +34,4 @@ void loop(){ // sollte blinken. aber blinken war nicht das ziel
   }
  
 } 
+
