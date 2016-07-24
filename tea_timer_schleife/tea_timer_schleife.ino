@@ -25,25 +25,29 @@ void schleife(){
     while (i!=0){
       if (i%2==1){
         digitalWrite(led1, HIGH);
-        delay (500);
-        digitalWrite(led1, LOW);
+
+
       }
       else if (i%4==2) {
         digitalWrite (led2, HIGH);
-        delay (500);
-        digitalWrite (led2, LOW); 
+
+
       }
       else if (i%8==4) {
         digitalWrite(led4, HIGH);
-        delay(500);
-        digitalWrite(led4, LOW);
+
+
       }
       else if (i>=8){
         digitalWrite(led8, HIGH);
-        delay (500);
-        digitalWrite(led8, LOW);
+
+
       }
-      
+      delay(1000);
+      digitalWrite(led8, LOW);
+      digitalWrite(led4, LOW);
+      digitalWrite (led2, LOW);
+      digitalWrite(led1, LOW);
       i=i/2; 
     }
 
@@ -52,6 +56,7 @@ void schleife(){
   delay (1000);
   digitalWrite(led0, LOW);   
 }
+
 
 
 
