@@ -6,6 +6,7 @@ int led0 = 6;
 #include <Servo.h>
 Servo myservo;
 int pos =0;
+int i;
 
 void setup(){ 
   pinMode(led1, OUTPUT);
@@ -23,26 +24,8 @@ void schleife(){
   for (j=10,j<=0; j--;){ 
     int i=j;
     while (i!=0){
-      if (i%2==1){
-        digitalWrite(led1, HIGH);
-
-
-      }
-      else if (i%4==2) {
-        digitalWrite (led2, HIGH);
-
-
-      }
-      else if (i%8==4) {
-        digitalWrite(led4, HIGH);
-
-
-      }
-      else if (i>=8){
-        digitalWrite(led8, HIGH);
-
-
-      }
+      eight();
+      
       delay(1000);
       digitalWrite(led8, LOW);
       digitalWrite(led4, LOW);
@@ -58,5 +41,28 @@ void schleife(){
 }
 
 
+void eight(){ 
+  if (i>=8){
+  digitalWrite(led8, HIGH);
+  four();
+  two();
+  one();
+  }
+}
 
+void four(){
+  if (i>=4){ 
+    digitalWrite(led4,HIGH);
+  }
+}
 
+void two(){
+  if (i>=2){
+    digitalWrite(led2, HIGH);
+  }
+}
+void one(){
+  if (i%2==1){
+    digitalWrite(led1, HIGH);
+  }
+}
