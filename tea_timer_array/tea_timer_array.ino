@@ -18,30 +18,35 @@ void loop(){
   schleife();
 } 
 void schleife(){
-   boolean mod;
+   int mod;
     int bin[]={2,3,4,5};
      int j;
-       int k=0;
-  for (j=10;j>=0; j--){ //wiso geht er nie in die schleife? weil abbruch bedinung sofort erreicht war
-      digitalWrite(9, HIGH);
-  //fängt bei 10 an. gibt aber keinen pin 10. nur 5,4,3,2
-    
+       
+  for (j=10;j>=0; j--){ 
+      
+    int k=0;  
     int i=j;
-    mod= i%2;  //an welcher stelle muss das stehen? 
-    while(i!=0) { //while zählt nicht hoch. ich brauche eine for schleife  sollte bei 2 anfangen, bis 5
-                     
-   if (mod=true){
-  digitalWrite(bin[k], HIGH); //aber zählt das auch hoch?  oder geht dann immer die selbe lampe an?
+    
+    while(i!=0) { 
+    mod= i%2;  //an welcher stelle muss das stehen?    ist gerade nie false, das ist ein problem, so gibts kein else...            
+   if (mod==1){  //ohne boolean versuchen?  if (i%2==1)
+  digitalWrite(bin[k], HIGH); 
     k=k+1;
     i=i/2;
+    //digitalWrite(9, HIGH);
+    
     }
-  else { 
+  else { //else tritt nie ein. fehler im boolean
     i=i/2;
     k=k+1;
-    //digitalWrite(9, LOW);
+    
+   /* digitalWrite(6, HIGH);
+    delay (200);
+    digitalWrite(6, LOW); */
+    
   }
-      delay (300);
-      digitalWrite(9,LOW);
+   mod=0;  
+  //delay(500); 
     }
     
       delay(1000);
@@ -49,13 +54,15 @@ void schleife(){
       digitalWrite(3, LOW);
       digitalWrite(4, LOW);
       digitalWrite(5, LOW);
-      
-      delay(500);
+      //delay (900);
+      //digitalWrite(9,LOW);
+      delay(100);
   }
   delay(500);  // später wieder verlängern
   digitalWrite(6, HIGH);
-  delay (500);
+  delay (1000);
   digitalWrite(6, LOW);
+  delay(2000);
 
   
 }
