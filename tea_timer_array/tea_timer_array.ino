@@ -11,38 +11,53 @@ void setup(){
   pinMode(4, OUTPUT); //led4
   pinMode(5, OUTPUT); //led8
   pinMode(6, OUTPUT); //led0
+  pinMode(9, OUTPUT);//grüner tester
 }
 
 void loop(){ 
   schleife();
 } 
 void schleife(){
-  int j;
+   boolean mod;
     int bin[]={2,3,4,5};
+     int j;
+       int k=0;
+  for (j=10;j>=0; j--){ //wiso geht er nie in die schleife? weil abbruch bedinung sofort erreicht war
+      digitalWrite(9, HIGH);
+  //fängt bei 10 an. gibt aber keinen pin 10. nur 5,4,3,2
     
-  for (j=10;j<=0; j--){ 
     int i=j;
-    boolean mod= i%2;
-    while(i!=0){
+    mod= i%2;  //an welcher stelle muss das stehen? 
+    while(i!=0) { //while zählt nicht hoch. ich brauche eine for schleife  sollte bei 2 anfangen, bis 5
+                     
    if (mod=true){
-  digitalWrite(bin[i], HIGH);
-   i=i/2;
+  digitalWrite(bin[k], HIGH); //aber zählt das auch hoch?  oder geht dann immer die selbe lampe an?
+    k=k+1;
+    i=i/2;
     }
   else { 
     i=i/2;
+    k=k+1;
+    //digitalWrite(9, LOW);
   }
-
+      delay (300);
+      digitalWrite(9,LOW);
     }
+    
       delay(1000);
       digitalWrite(2, LOW);
       digitalWrite(3, LOW);
       digitalWrite(4, LOW);
       digitalWrite(5, LOW);
-      delay(50);
+      
+      delay(500);
   }
+  delay(500);  // später wieder verlängern
   digitalWrite(6, HIGH);
-  delay (1000);
-  digitalWrite(6, LOW);   
+  delay (500);
+  digitalWrite(6, LOW);
+
+  
 }
 
 
