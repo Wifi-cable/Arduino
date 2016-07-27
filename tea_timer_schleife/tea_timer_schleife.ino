@@ -7,6 +7,7 @@ int led0 = 6;
 Servo myservo;
 int pos =0;
 int i;
+bin[];
 
 void setup(){ 
   pinMode(led1, OUTPUT);
@@ -21,19 +22,19 @@ void loop(){
 } 
 void schleife(){
   int j;
-  for (j=10,j<=0; j--;){ 
+  for (j=10;j<=0; j--){ 
     int i=j;
     while (i!=0){
-      eight();
-      
+  
+    bin[]={led8,led4,led2,led1};
+
+      i=i/2; 
+    }
       delay(1000);
       digitalWrite(led8, LOW);
       digitalWrite(led4, LOW);
       digitalWrite (led2, LOW);
       digitalWrite(led1, LOW);
-      i=i/2; 
-    }
-
   }
   digitalWrite(led0, HIGH);
   delay (1000);
@@ -41,28 +42,4 @@ void schleife(){
 }
 
 
-void eight(){ 
-  if (i>=8){
-  digitalWrite(led8, HIGH);
-  four();
-  two();
-  one();
-  }
-}
 
-void four(){
-  if (i>=4){ 
-    digitalWrite(led4,HIGH);
-  }
-}
-
-void two(){
-  if (i>=2){
-    digitalWrite(led2, HIGH);
-  }
-}
-void one(){
-  if (i%2==1){
-    digitalWrite(led1, HIGH);
-  }
-}
