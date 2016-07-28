@@ -29,25 +29,10 @@ void schleife(){
     int i=j;
     while(i!=0) 
     { 
-      mod= i%2;  //an welcher stelle muss das stehen?    ist gerade nie false, das ist ein problem, so gibts kein else...            
-      if (mod==1)
-      {  //ohne boolean versuchen?  if (i%2==1)
-        digitalWrite(bin[k], HIGH); 
-      }
+      digitalWrite(bin[k++], i%2 ? HIGH : LOW); 
       i=i/2;
-      k=k+1;
     }
-    mod=0;  
-    //delay(500); 
-    
     delay(1000);
-    digitalWrite(2, LOW);
-    digitalWrite(3, LOW);
-    digitalWrite(4, LOW);
-    digitalWrite(5, LOW);
-    //delay (900);
-    //digitalWrite(9,LOW);
-    delay(100);
   }
   delay(500);  // später wieder verlängern
   digitalWrite(6, HIGH);
