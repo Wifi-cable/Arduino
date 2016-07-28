@@ -25,12 +25,9 @@ void schleife(){
        
   for (j=10;j>=0; j--)
   {
-    int k=0;  
-    int i=j;
-    while(i!=0) 
+    for (int i=j, k=0; k<4; i>>=2) 
     { 
       digitalWrite(bin[k++], i%2 ? HIGH : LOW); 
-      i=i/2;
     }
     delay(1000);
   }
