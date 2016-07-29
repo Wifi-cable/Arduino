@@ -2,6 +2,9 @@
 #include <Servo.h>
 Servo myservo;
 int pos =0;
+int aus = 0;  // button is off
+const int knopf =10; //pushputton
+
 //int i;
 //int bin[4];
 
@@ -11,7 +14,9 @@ void setup(){
   pinMode(4, OUTPUT); //led4
   pinMode(5, OUTPUT); //led8
   pinMode(6, OUTPUT); //led0
+  myservo.attach(7); //der servo
   pinMode(9, OUTPUT);//grüner tester
+  pinMode(10, INPUT);  // an knopf
 }
 
 void loop(){ 
@@ -21,7 +26,9 @@ void schleife(){
    int mod;
     int bin[]={2,3,4,5};
      int j;
-       
+     int s;
+   aus= digitalRead(knopf);
+if(knopf == HIGH){   
   for (j=10;j>=0; j--){ 
       
     int k=0;  
@@ -64,8 +71,11 @@ void schleife(){
   digitalWrite(6, LOW);
   delay(2000);
 
-  
+  for (s=0; s >=90; s++){
+ myservo.write(pos);
+    delay(100);
+  }
 }
-
+}
 
 
