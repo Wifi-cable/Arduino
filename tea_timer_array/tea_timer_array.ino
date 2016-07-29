@@ -20,7 +20,7 @@ void setup(){
 }
 
 void loop(){ 
-  schleife();
+  //schleife();
 } 
 void schleife(){
    int mod;
@@ -28,6 +28,7 @@ void schleife(){
      int j;
      int s;
    aus= digitalRead(knopf);
+  long time= 180000;
 if(knopf == HIGH){   
   for (j=10;j>=0; j--){ 
       
@@ -43,13 +44,10 @@ if(knopf == HIGH){
     //digitalWrite(9, HIGH);
     
     }
-  else { //else tritt nie ein. fehler im boolean
+  else { 
     i=i/2;
     k=k+1;
-    
-   /* digitalWrite(6, HIGH);
-    delay (200);
-    digitalWrite(6, LOW); */
+
     
   }
    mod=0;  
@@ -75,7 +73,13 @@ if(knopf == HIGH){
  myservo.write(pos);
     delay(100);
   }
+  delay(time);
+  
+  for (s=90; s==0; s--){ 
+  myservo.write(pos);
 }
+}
+
 }
 
 
