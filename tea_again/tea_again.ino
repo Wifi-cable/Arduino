@@ -31,6 +31,7 @@ void schleife(){ //were is the end?
   int s;
   aus= digitalRead(knopf); //fehler in den kabeln oder hier?
   long time;
+  myservo.write(pos_oben);
 
   if(aus == HIGH){
     digitalWrite(9, LOW);
@@ -60,14 +61,14 @@ void schleife(){ //were is the end?
    //delay(500); 
    } //end while to create binary...
    
-   delay(1000);
+   delay(1200);
    digitalWrite(2, LOW);
    digitalWrite(3, LOW);
    digitalWrite(4, LOW);
    digitalWrite(5, LOW);
    //delay (900);
    //digitalWrite(9,LOW);  
-   delay(500);
+   delay(300);
    }  // end for schleife countdown 
    delay(500);  // später wieder verlängern
    digitalWrite(6, HIGH);
@@ -81,10 +82,10 @@ void schleife(){ //were is the end?
    // }
 
 myservo.write(pos_unten);
-    for (time=0;time<=22000; time++){
+    for (time=0;time<=22; time++){
      int  j=2;//ersetzen, jeh schleife 4 sekunden
        // vieliecht die abfrage weg?  einfach jedes 4 x?  while weistergeier!=
-        for (j=0; j<=4; j++){
+        for (j=0; j<=3; j++){
           
           digitalWrite(bin[j],HIGH);
           delay (500);
@@ -93,7 +94,7 @@ myservo.write(pos_unten);
         }
       
        
-        for (j=4; j>=0; j--){
+        for (j=3; j>=0; j--){
           digitalWrite(bin[j],HIGH);
           delay(500);
           digitalWrite(bin[j], LOW);
@@ -104,7 +105,7 @@ myservo.write(pos_unten);
 
     }
 
-
+myservo.write(pos_oben);
     
 
 //myservo.write(pos_unten);
@@ -112,7 +113,7 @@ myservo.write(pos_unten);
 
   else { 
     digitalWrite(9, HIGH);
-    myservo.write(pos_oben);
+   // myservo.write(pos_oben);
   }  //end else
 } //end schleife
 
