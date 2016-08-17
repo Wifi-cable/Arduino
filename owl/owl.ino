@@ -1,37 +1,31 @@
+  #include<Servo.h>
+  Servo eyes;  // servo to move the owls eylids
   const int sensor =A0;
   const int red = 4;
   const int yellow = 2;
   const int green = 3;
-  
+  int serv=0;
  
 void setup (){ 
   pinMode(sensor, INPUT);
   pinMode (red, OUTPUT);
   pinMode(yellow, OUTPUT);
   pinMode(green, OUTPUT);
-  Serial.begin(300);  //rate of data transmission 
+  eyes.attach(8);
+  //Serial.begin(300);  //rate of data transmission 
 }
 void loop(){ 
 
-  /*digitalWrite(red,HIGH);
-  digitalWrite(green, HIGH);
-  digitalWrite(yellow, HIGH);
-  delay (500);
-  digitalWrite(red, LOW);
-  digitalWrite(yellow, LOW);
-  digitalWrite(green, LOW);
-  delay(500);
-  */
-   int sensorVal=analogRead(sensor);
+   int sensorVal=analogRead(sensor); //light sensor 
    
-  if (sensorVal>=801){ // fairly dark
+  if (sensorVal>=801){ //500== fairly dark
   digitalWrite (red, HIGH);
   delay(500);
   digitalWrite(red, LOW);
   delay(500);
     } 
 else { 
- if (sensorVal<=800 && sensorVal>=400){  //very dark
+ if (sensorVal<=800 && sensorVal>=400){  // medium light
   digitalWrite(yellow, HIGH);
   delay(500);
   digitalWrite(yellow, LOW);
@@ -44,4 +38,9 @@ else {
           delay(500);
         }
     }
+    //servotest
+    eyes.write(0);
+    delay(200);
+    eyes.write(20);
+    delay(200);
 }
