@@ -6,6 +6,7 @@
   const int green = 3;
   const int buzz=12;
   int serv=0;
+  //const int sensorVal=analogRead(sensor); //light sensor does not seem to work here
  
 void setup (){ 
   pinMode(sensor, INPUT);
@@ -20,6 +21,7 @@ void loop(){
 
    //light();
    squeek();
+   light();
 }
 void light(){
 int sensorVal=analogRead(sensor); //light sensor 
@@ -52,6 +54,7 @@ else {
     */
 }
 void squeek(){
+int sensorVal=analogRead(sensor); //light sensor 
 /*note  frequency
   c     262 Hz
   d     294 Hz
@@ -61,11 +64,21 @@ void squeek(){
   a     440 Hz
   b     494 Hz
   C     523 Hz*/
-  int b;
-  //for (b=0; b>=10 ; b++){
+ if (sensorVal<=800){
+  
     tone(buzz, 262);
-    delay(500);
+    delay(100);
     noTone(buzz);
-    delay(500);
- // }
+    delay(200);
+    tone(buzz,262),
+    delay(100);
+    noTone(buzz);
+    delay(5000);
+ }
+ else {    //not reading the light sensor. why?
+   tone(buzz, 523);
+   delay (3000);
+   noTone(buzz);
+   delay(10000);
+     }
 }
