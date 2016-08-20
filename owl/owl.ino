@@ -92,10 +92,19 @@ void squeek(){
 }
 void sreech(){ // suposably  code that resembles this should produce screeching. practically it is the softes of clicking
   if (sensorVal>=600){
-    analogWrite(buzz,200);
+    /*int s;
+    for (s=0; s<=255; s++){ //loop to see if i can hear that buzzer
+    
+    analogWrite(buzz,s);
     delay(500);
     analogWrite(buzz,0);
     delay(500);
+    digitalWrite(green, HIGH); 
+    //debug the loop. is it in the loop?
+    Serial.println(s);
+  }
+  digitalWrite(green, LOW);
+  delay (1000);  */
   }
 }
  void lightTest(){  
