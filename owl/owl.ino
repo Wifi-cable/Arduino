@@ -7,7 +7,7 @@
   const int buzz=12;
   int serv=0;
   //const int sensorVal=analogRead(sensor); //light sensor does not seem to work here
- int sensorVal= analogRead(sensor); // local? 
+  int sensorVal;
 void setup (){ 
   pinMode(sensor, INPUT);
   pinMode (red, OUTPUT);
@@ -19,14 +19,14 @@ void setup (){
   
 }
 void loop(){ 
-
+ int sensorVal= analogRead(sensor); // local? 
    //light();
    //squeek();
    light();
    lightTest();
 }
 void light(){
-int sensorVal=analogRead(sensor); //light sensor 
+//int sensorVal=analogRead(sensor); //light sensor 
    
   if (sensorVal>=801){ //500== fairly dark
   digitalWrite (red, HIGH);
@@ -56,7 +56,7 @@ else {
     */
 }
 void squeek(){
-int sensorVal=analogRead(sensor); //light sensor 
+//int sensorVal=analogRead(sensor); //light sensor 
 /*note  frequency
   c     262 Hz
   d     294 Hz
