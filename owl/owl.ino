@@ -7,7 +7,7 @@
   const int buzz=12;
   int serv=0;
   //const int sensorVal=analogRead(sensor); //light sensor does not seem to work here
-  int sensorVal;
+
 void setup (){ 
   pinMode(sensor, INPUT);
   pinMode (red, OUTPUT);
@@ -19,13 +19,13 @@ void setup (){
   
 }
 void loop(){ 
- sensorVal= analogRead(sensor); // local? 
+   int sensorVal= analogRead(sensor); // local? 
    //light();
    //squeek();
-   light();
-   lightTest();
+   light(sensorVal);
+   lightTest(sensorVal);
 }
-void light(){
+void light(int sensorVal){
 //int sensorVal=analogRead(sensor); //light sensor 
    
   if (sensorVal>=801){ //500== fairly dark
@@ -33,21 +33,21 @@ void light(){
   delay(500);
   digitalWrite(red, LOW);
   delay(500);
-    } 
-else { 
- if (sensorVal<=800 && sensorVal>=400){  // medium light
+  } 
+  else { 
+  if (sensorVal<=800 && sensorVal>=400){  // medium light
   digitalWrite(yellow, HIGH);
   delay(500);
   digitalWrite(yellow, LOW);
   delay(500);  
-      }
-      else {
+  }
+  else {
           digitalWrite(green, HIGH);
           delay(500);
           digitalWrite(green, LOW);
           delay(500);
         }
-    }
+  }
    /* //servotest
     eyes.write(0);
     delay(200);
@@ -55,7 +55,7 @@ else {
     delay(200);
     */
 }
-void squeek(){
+void squeek(int sensorVal){
 //int sensorVal=analogRead(sensor); //light sensor 
 /*note  frequency
   c     262 Hz
@@ -84,8 +84,8 @@ void squeek(){
    delay(10000);
      }
 }
-void sreech(){ }
-void lightTest(){
+void sreech(int sensorVal){ }
+void lightTest(int sensorVal){
   String test= "funst?"; //string to test the serial monitor, laptop is talking to serial
  Serial.println(sensorVal);  //read the level of light in my room
  Serial.println(test);
