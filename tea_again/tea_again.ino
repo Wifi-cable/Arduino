@@ -2,7 +2,7 @@
 #include <Servo.h>
 Servo myservo;
 int pos_oben = 10;
-int pos_unten = 90;
+int pos_unten = 100;
 int aus = 0;  // 1button is off
 const int knopf =10; //pushputton
 
@@ -10,14 +10,15 @@ const int knopf =10; //pushputton
 //int bin[4];
 
 void setup(){ 
-  pinMode(2, OUTPUT); //led1
-  pinMode(3, OUTPUT); //led2
-  pinMode(4, OUTPUT); //led4
-  pinMode(5, OUTPUT); //led8
-  pinMode(6, OUTPUT); //led0
-  myservo.attach(8); //der servo
-  pinMode(9, OUTPUT);//grüner tester
-  pinMode(10, INPUT);  // an knopf
+  pinMode(2, OUTPUT); //d2 led1
+  pinMode(3, OUTPUT); // d3 led2
+  pinMode(4, OUTPUT); //d4 led4
+  pinMode(5, OUTPUT); //d5 led8
+  pinMode(6, OUTPUT); //d6 green led0
+  myservo.attach(7); //der servo d8      auf 7!
+  pinMode(8, OUTPUT);// yellow.
+  //pinMode(9, OUTPUT);
+  pinMode(10, INPUT);  // on off button  d10 knopfende
 } //end setup
 
 void loop(){ 
@@ -29,13 +30,13 @@ void schleife(){ //were is the end?
   int bin[]={ 2,3,4,5  };
   int j;
   int s;
-  aus= digitalRead(knopf); //fehler in den kabeln oder hier?
+  aus= digitalRead(knopf); //pushbutton off
   long time;
-  myservo.write(pos_oben);
+  myservo.write(pos_oben); //top position
 
   if(aus == HIGH){
-    digitalWrite(9, LOW);
-  
+    digitalWrite(8, LOW);
+  delay(500);
      
    for (j=10;j>=0; j--){ 
    
@@ -61,29 +62,26 @@ void schleife(){ //were is the end?
    //delay(500); 
    } //end while to create binary...
    
-   delay(1200);
+   delay(800);
    digitalWrite(2, LOW);
    digitalWrite(3, LOW);
    digitalWrite(4, LOW);
    digitalWrite(5, LOW);
    //delay (900);
    //digitalWrite(9,LOW);  
-   delay(300);
+   delay(500);
    }  // end for schleife countdown 
    delay(500);  // später wieder verlängern
-   digitalWrite(6, HIGH);
+   digitalWrite(8, HIGH);
    delay (1000);
-   digitalWrite(6, LOW);
-   delay(2000); 
+   //digitalWrite(8, LOW);
+   //delay(500); 
 
-    //for (s=0; s <=90; s++){
-     // myservo.write(pos_unten);
-      //delay(100);
-   // }
 
 myservo.write(pos_unten);
-    for (time=0;time<=22; time++){
-     int  j=2;//ersetzen, jeh schleife 4 sekunden
+    for (time=0;time<=23; time++){
+      //digitalWrite(6, HIGH);
+      //int  j=2;//ersetzen, jeh schleife 4 sekunden
        // vieliecht die abfrage weg?  einfach jedes 4 x?  while weistergeier!=
         for (j=0; j<=3; j++){
           
@@ -104,15 +102,16 @@ myservo.write(pos_unten);
 
 
     }
-
+digitalWrite(8,LOW);
 myservo.write(pos_oben);
-    
-
-//myservo.write(pos_unten);
-  } //dafu end if?
+    digitalWrite(6,HIGH);
+    delay (3000);
+    digitalWrite(6, LOW);
+  } 
 
   else { 
-    digitalWrite(9, HIGH);
+    //digitalWrite(6, HIGH);
+    digitalWrite(8, HIGH);
    // myservo.write(pos_oben);
   }  //end else
 } //end schleife

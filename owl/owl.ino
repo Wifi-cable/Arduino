@@ -7,21 +7,23 @@
   const int buzz=12;
   int serv=0;
   //const int sensorVal=analogRead(sensor); //light sensor does not seem to work here
- 
+ int sensorVal= analogRead(sensor); // local? 
 void setup (){ 
   pinMode(sensor, INPUT);
   pinMode (red, OUTPUT);
   pinMode(yellow, OUTPUT);
   pinMode(green, OUTPUT);
   eyes.attach(8);
-  pinMode(buzz, OUTPUT);//the buzzer or speaker
-  //Serial.begin(300);  //rate of data transmission 
+  pinMode(buzz, OUTPUT);  //the buzzer or speaker
+  Serial.begin(9600);  //rate of data transmission 
+  
 }
 void loop(){ 
 
    //light();
-   squeek();
+   //squeek();
    light();
+   lightTest();
 }
 void light(){
 int sensorVal=analogRead(sensor); //light sensor 
@@ -67,7 +69,7 @@ int sensorVal=analogRead(sensor); //light sensor
  if (sensorVal<=800){
   
     tone(buzz, 262);
-    delay(100);
+    delay(300);
     noTone(buzz);
     delay(200);
     tone(buzz,262),
@@ -82,3 +84,9 @@ int sensorVal=analogRead(sensor); //light sensor
    delay(10000);
      }
 }
+void sreech(){ }
+void lightTest(){
+  String test= "funst?"; //string to test the serial monitor, laptop is talking to serial
+ Serial.println(sensorVal);  //read the level of light in my room
+ Serial.println(test);
+ }
