@@ -19,7 +19,7 @@ void setup (){
   
 }
 void loop(){ 
- int sensorVal= analogRead(sensor); // local? 
+ sensorVal= analogRead(sensor); // local? 
    //light();
    //squeek();
    light();
