@@ -42,4 +42,6 @@ void schleife(){
 }
 
 
+/*for (int k=0, i=j; i; i/=2) digitalWrite(bin[k++], i%2? HIGH:LOW);  */
 
+/* for (int k=0, int i=j; i; i/=2) digitalWrite(bin[k++], i%2? HIGH:LOW); */
