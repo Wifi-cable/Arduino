@@ -6,9 +6,10 @@ const int yellow = 2;
 const int green = 3;
 //const int buzz=12;  //make buzzer analoge instead?
 //const int buzz = A1;
-const int buzz=9;
+const int buzz=9;// buzzer, red red brown resisor
+const int out= 12;  // the red-red-yellow, make it an input just like buzz
 int serv=0;
-
+// free pins are 13,11,10.(7,6,5)
 int sensorVal; //now light sensor variable works
 
 
@@ -16,10 +17,11 @@ void setup (){
   pinMode(sensor, INPUT);
   pinMode (red, OUTPUT);
   pinMode(yellow, OUTPUT);
-  pinMode(green, OUTPUT);
+  pinMode(green, INPUT);
   eyes.attach(8);
+  pinMode(out,OUTPUT);
  // pinMode(buzz, OUTPUT);  //the buzzer or speaker
- pinMode(buzz, OUTPUT);
+ pinMode(buzz, INPUT);
   analogWrite(buzz, 40);  //buzzer in analog more arguments like amount?
   Serial.begin(9600);  //rate of data transmission 
 /* mach die Zeile oben mal zu 
@@ -27,8 +29,8 @@ sensorVal= analogRead(sensor); // consistently global*/
 }
 void loop(){ 
  sensorVal= analogRead(sensor); // local? 
-  //light();
-  //squeek();
+  light();
+  squeek();
   //sreech();
 lightTest(); 
 }
@@ -74,7 +76,7 @@ void squeek(){
    b     494 Hz
    C     523 Hz*/
   if (sensorVal<=800){
-
+  //set buzz as output, and 12 as input
     tone(buzz, 262);
     delay(300);
     noTone(buzz);
@@ -85,7 +87,7 @@ void squeek(){
     delay(5000);
   }
   else {    
-    tone(buzz, 523);
+    tone(buzz, 523);  //set buzz as input and 12 as output
     delay (3000);
     noTone(buzz);
     delay(10000);
