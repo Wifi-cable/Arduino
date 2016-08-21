@@ -5,7 +5,8 @@ const int red = 4;
 const int yellow = 2;
 const int green = 3;
 //const int buzz=12;  //make buzzer analoge instead?
-const int buzz = A1;
+//const int buzz = A1;
+const int buzz=9;
 int serv=0;
 
 int sensorVal; //now light sensor variable works
@@ -26,10 +27,10 @@ sensorVal= analogRead(sensor); // consistently global*/
 }
 void loop(){ 
  sensorVal= analogRead(sensor); // local? 
-  light();
+  //light();
   //squeek();
-  sreech();
-  lightTest(); 
+  //sreech();
+lightTest(); 
 }
 void light(){
   //int sensorVal=analogRead(sensor); //light sensor 
@@ -92,6 +93,18 @@ void squeek(){
 }
 void sreech(){ // suposably  code that resembles this should produce screeching. practically it is the softes of clicking
   if (sensorVal>=600){
+    
+for (int i=0; i<=155; i++){ 
+    analogWrite(buzz, i);
+    delay (500);
+    digitalWrite(buzz, LOW);
+    delay (200);
+    String is=" i = ";
+    
+    Serial.println(is + i);  
+   
+  }  
+    
     /*int s;
     for (s=0; s<=255; s++){ //loop to see if i can hear that buzzer
     
@@ -105,6 +118,9 @@ void sreech(){ // suposably  code that resembles this should produce screeching.
   }
   digitalWrite(green, LOW);
   delay (1000);  */
+  /*  D zu kurzem Bein von der LED, langes Bein von der LED zu 220 Ohm, 220 Ohm zu 5V.*/
+  
+  delay(5000);
   }
 }
  void lightTest(){  
