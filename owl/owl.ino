@@ -8,8 +8,8 @@ const int green = 3;
 //const int buzz = A1;
 const int buzz=9;// buzzer, no resistor
 // digital I/O to connect different resistors to the other terminal of buzzer
-const int laut= 11; // red red brown resisor
-const int luise= 12;// the red-red-yellow
+const int laut= 11; // red red brown (220 Ohm) resisor
+const int luise= 12;// the red-red-yellow (220000 Ohm) resistor
 int serv=0;
 // free pins are 13,11,10.(7,6,5)
 int sensorVal; //now light sensor variable works
@@ -78,7 +78,7 @@ void squeek(){
    b     494 Hz
    C     523 Hz*/
   if (sensorVal<=800){
-    pinMode(luise,OUTPUT);  // keep laut as input, make luise output
+    pinMode(luise,OUTPUT);  // turn on high resistor path to buzzer
     tone(buzz, 262);
     delay(300);
     noTone(buzz);
@@ -87,17 +87,16 @@ void squeek(){
     delay(100);
     noTone(buzz);
     delay(5000);
+    pinMode(luise,INPUT);  // turn off high resistor path to buzzer
   }
   else {    
-    pinMode(laut,OUTPUT);  // keep luise as input, make laut output
+    pinMode(laut,OUTPUT);  // turn on low resistor path to buzzer
     tone(buzz, 523);  //set buzz as input and 12 as output
     delay (3000);
     noTone(buzz);
     delay(10000);
+    pinMode(laut,INPUT);  // turn off low resistor path to buzzer
   }
-  // preemptively turn both pins off
-  pinMode(laut,INPUT);
-  pinMode(luise,INPUT);
 }
 void sreech(){ // suposably  code that resembles this should produce screeching. practically it is the softes of clicking
   if (sensorVal>=600){
