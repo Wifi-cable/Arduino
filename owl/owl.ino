@@ -4,12 +4,12 @@ const int sensor =A0;
 const int red = 4;
 const int yellow = 2;
 const int green = 3;
-//const int buzz=12;  //make buzzer analoge instead?
-//const int buzz = A1;
-const int buzz=9;// buzzer, red red brown resisor
-const int out= 12;  // the red-red-yellow, make it an input just like buzz
-int serv=0;
-// free pins are 13,11,10.(7,6,5)
+const int buzz=9;  //the buzzer 
+const int loud=12;  // more volume
+const int quiet= 13;  // less volume
+int sleep;
+int wake;
+
 int sensorVal; //now light sensor variable works
 
 
@@ -19,24 +19,25 @@ void setup (){
   pinMode(yellow, OUTPUT);
   pinMode(green, INPUT);
   eyes.attach(8);
-  pinMode(out,OUTPUT);
- // pinMode(buzz, OUTPUT);  //the buzzer or speaker
- pinMode(buzz, INPUT);
-  analogWrite(buzz, 40);  //buzzer in analog more arguments like amount?
+  //pinMode(quiet,OUTPUT);
+  pinMode(buzz, OUTPUT);  //the buzzer or speaker
+ //pinMode(loud, INPUT);
+  //analogWrite(loud, 40);  //buzzer in analog more arguments like amount?
+  eyes.attach(7);
   Serial.begin(9600);  //rate of data transmission 
-/* mach die Zeile oben mal zu 
-sensorVal= analogRead(sensor); // consistently global*/
+
+sensorVal= analogRead(sensor);
 }
 void loop(){ 
- sensorVal= analogRead(sensor); // local? 
+ sensorVal= analogRead(sensor);  
   light();
   squeek();
-  //sreech();
+  
 lightTest(); 
 }
 void light(){
   //int sensorVal=analogRead(sensor); //light sensor 
-
+  
   if (sensorVal>=801){ //500== fairly dark
     digitalWrite (red, HIGH);
     delay(500);
@@ -55,7 +56,8 @@ void light(){
       delay(500);
       digitalWrite(green, LOW);
       delay(500);
-    }
+    }    //input==  not active
+        //output+ low== ground
   }
   /* //servotest
    eyes.write(0);
@@ -65,6 +67,7 @@ void light(){
    */
 }
 void squeek(){
+
   //int sensorVal=analogRead(sensor); //light sensor 
   /*note  frequency
    c     262 Hz
@@ -75,56 +78,71 @@ void squeek(){
    a     440 Hz
    b     494 Hz
    C     523 Hz*/
-  if (sensorVal<=800){
-  //set buzz as output, and 12 as input
+   pinMode(quiet,INPUT);
+   pinMode(loud,INPUT);
+     sleep=0;  //servo positions
+     wake=90;
+  
+   
+  if (sensorVal<=800 && sensorVal >=200){
+    eyes.write(sleep);
+    
+ if (sensorVal<500){//wake or move the servo to move the eyelids
+ int i;
+ int j=0;
+   for (i=sleep; i< wake; i+=1){ //open the eyes slowly
+   eyes.write(i);
+   delay(15);
+   }
+    while(j>4){
+    eyes.write(i-4); // blink the eyes
+    delay(50);
+    eyes.write(i+4);
+    delay(50);
+    j+=1;
+  }
+   delay(10000);
+   
+   for (i=wake; i>=sleep; i-=1){ 
+   eyes.write(i);
+   delay (20);
+   }
+ }
+ 
+ else{//sleep
+  pinMode(quiet,OUTPUT);
+  digitalWrite(quiet,LOW);
     tone(buzz, 262);
-    delay(300);
-    noTone(buzz);
     delay(200);
+    noTone(buzz);
+    delay(20);
     tone(buzz,262),
-    delay(100);
+    delay(600);
     noTone(buzz);
     delay(5000);
-  }
-  else {    
-    tone(buzz, 523);  //set buzz as input and 12 as output
+ } 
+    
+  } else if (sensorVal<=200)  { 
+      noTone(buzz);
+     }
+    
+  
+  else { //louder  shocked awake
+  
+    pinMode(loud,OUTPUT); 
+   pinMode(quiet,INPUT); //loud
+    digitalWrite(loud, LOW);
+    tone(loud, 523);  //set buzz as input and 12 as output
     delay (3000);
-    noTone(buzz);
+    noTone(loud);
+    tone(loud,494);
+    delay(1000);
+    noTone(loud);
     delay(10000);
   }
 }
-void sreech(){ // suposably  code that resembles this should produce screeching. practically it is the softes of clicking
-  if (sensorVal>=600){
-    
-for (int i=0; i<=155; i++){ 
-    analogWrite(buzz, i);
-    delay (500);
-    digitalWrite(buzz, LOW);
-    delay (200);
-    String is=" i = ";
-    
-    Serial.println(is + i);  
-   
-  }  
-    
-    /*int s;
-    for (s=0; s<=255; s++){ //loop to see if i can hear that buzzer
-    
-    analogWrite(buzz,s);
-    delay(500);
-    analogWrite(buzz,0);
-    delay(500);
-    digitalWrite(green, HIGH); 
-    //debug the loop. is it in the loop?
-    Serial.println(s);
-  }
-  digitalWrite(green, LOW);
-  delay (1000);  */
-  /*  D zu kurzem Bein von der LED, langes Bein von der LED zu 220 Ohm, 220 Ohm zu 5V.*/
-  
-  delay(5000);
-  }
-}
+
+
  void lightTest(){  
   String test= "funst?"; //string to test the serial monitor, laptop is talking to serial
   Serial.println(sensorVal);  //read the level of light in my room 
