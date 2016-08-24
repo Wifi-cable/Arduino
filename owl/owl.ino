@@ -101,15 +101,16 @@ void squeek(){
     delay(50);
     j+=1;
   }
+  //turn the LEDs in the eyes on, once they physically exist
    delay(10000);
    
-   for (i=wake; i>=sleep; i-=1){ 
+   for (i=wake; i>=sleep; i-=1){ //go back to sleep close the eylids slowly
    eyes.write(i);
    delay (20);
-   }
+   } //turn the LEDs off again
  }
  
- else{//sleep
+ else{  //sleep mode
   pinMode(quiet,OUTPUT);
   digitalWrite(quiet,LOW);
     tone(buzz, 262);
@@ -122,13 +123,16 @@ void squeek(){
     delay(5000);
  } 
     
-  } else if (sensorVal<=200)  { 
+  }  //end first if statement. (end of light beweeen 200 and 800)
+  else if (sensorVal<=200)  { //lower
       noTone(buzz);
+      eyes.write(sleep);
      }
     
   
-  else { //louder  shocked awake
-  
+  else { //light is over 800
+    //louder  shocked awake
+  eyes.write(wake);
     pinMode(loud,OUTPUT); 
    pinMode(quiet,INPUT); //loud
     digitalWrite(loud, LOW);
