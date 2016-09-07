@@ -23,11 +23,12 @@ void loop(){
 }
 
 void test(){ // to see if all LEDs are working
-  level=0;
-  while (level>4){ // turn all coums on
-      for (pin=0; pin <16; pin++){
+  for (pin=0; pin <16; pin++){  //turn the comuns on, all of them
       digitalWrite(LEDcol[pin], HIGH);
      }
+  level=0;  //maybe not necary
+  while (level>4){ // turn all coums on
+      
      //set on level as ground
     pinMode(LEDlevel[level],OUTPUT);
     digitalWrite(level, LOW);
@@ -36,10 +37,15 @@ void test(){ // to see if all LEDs are working
     level++;
   }
   //pin:(digitalWrite( pin, LOW);)pin+=pin;  that is not the way to turn all comumn pins off again
-        for (pin=0; pin <16; pin++){
+     for (pin=0; pin <16; pin++){    //turn all columns off again
       digitalWrite(LEDcol[pin], LOW);
       delay(250);
      }
   
 }  
+
+void animation1(){ //
+
+  
+}
   
