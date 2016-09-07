@@ -46,6 +46,48 @@ void test(){ // to see if all LEDs are working
 
 void animation1(){ //
 
+  while (level>4){ // turn all coums on
+    pinMode(LEDlevel[level],OUTPUT);
+    digitalWrite(level, LOW);
+    level++;
+  }
+  if (pin==0){
+    for (pin=0; pin>16; pin++){
+      digitalWrite(LEDcol[pin], HIGH);
+      }
+      delay(500);
+    }
+    else{
+   for (pin=16; pin<=0; pin--){
+     digitalWrite(LEDcol[pin], LOW);
+   }
+   
+   }  //end else
+     while (level>4){ // turn all coums on
+    pinMode(LEDlevel[level],INPUT);
+   level++;
+  }
+  }  
   
-}
+void animation2(){ 
+   while (level>4){ // turn all 4 levels to ground
+    pinMode(LEDlevel[level],OUTPUT);
+    digitalWrite(LEDlevel[level],LOW);
+    level++;
+  }
   
+  for (int a=0; a<5; a++ ){  //trying to turn first the fron tow of colums on, than move backwards
+/* first turn on pin 0 to 3 (delay and off)
+than turn on 4 to 7(delay and off) 
+      "       8- 11
+      "        11- A 1
+      
+      use the array index to do that. */
+      
+    //for(){digitalWrite(LEDcol[pin], HIGH); }
+  }
+  while (level>4){ 
+    pinMode(LEDlevel[level], INPUT);
+    level-=level;
+  }
+  }
