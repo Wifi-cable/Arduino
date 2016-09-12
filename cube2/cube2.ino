@@ -13,7 +13,7 @@ for (pin=0; pin>16; pin ++ ){  //setting up the colums
   pinMode(LEDcol[pin], OUTPUT);
   digitalWrite(LEDcol[pin], LOW); //default power off
  }
- for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
+ for (level=0; level<4; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], INPUT);
  }
 //levels -
@@ -45,8 +45,8 @@ void test(){ // to see if all LEDs are working
 }  
 
 void animation1(){ //
-
-  while (level>4){ // turn all coums on
+  level=0;  //maybe not necary
+  while (level<4){ // turn all coums on
     pinMode(LEDlevel[level],OUTPUT);
     digitalWrite(level, LOW);
     level++;
@@ -63,14 +63,16 @@ void animation1(){ //
    }
    
    }  //end else
-     while (level>4){ // turn all coums on
+  level=0;  //maybe not necary
+     while (level<4){ // turn all coums on
     pinMode(LEDlevel[level],INPUT);
    level++;
   }
   }  
   
 void animation2(){ 
-   while (level>4){ // turn all 4 levels to ground
+  level=0;  //maybe not necary
+   while (level<4){ // turn all 4 levels to ground
     pinMode(LEDlevel[level],OUTPUT);
     digitalWrite(LEDlevel[level],LOW);
     level++;
@@ -85,21 +87,21 @@ than turn on 4 to 7(delay and off)
       
     
   }
-  while (level>4){ //turns everything off
+  while (level>=0){ //turns everything off
     pinMode(LEDlevel[level], INPUT);
     level-=level;
   }
   }
   
 void animation3(){  //all outside on?
-  for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
+  for (level=0; level<4; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], OUTPUT);
     
      }
    
  }  
  void animation3side(){
-    for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
+    for (level=0; level<4; level++){  //setting the levels up, default is input, or not currently working as ground 
      digitalWrite(LEDlevel[level], LOW);
     }  //change to sides only, mittdle two levels
    digitalWrite(3,HIGH); 
@@ -113,7 +115,7 @@ void animation3(){  //all outside on?
    digitalWrite(A1,LOW);
    delay(20);
    
-    for (level=0; level>4; level++){  //no more ground
+    for (level=0; level<4; level++){  //no more ground
      digitalWrite(LEDlevel[level], HIGH);
     }
   
