@@ -81,13 +81,63 @@ void animation2(){
 than turn on 4 to 7(delay and off) 
       "       8- 11
       "        11- A 1
-      
       use the array index to do that. */
       
-    //for(){digitalWrite(LEDcol[pin], HIGH); }
+    
   }
-  while (level>4){ 
+  while (level>4){ //turns everything off
     pinMode(LEDlevel[level], INPUT);
     level-=level;
   }
   }
+  
+void animation3(){  //all outside on?
+  for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
+     pinMode(LEDlevel[level], OUTPUT);
+    
+     }
+   
+ }  
+ void animation3side(){
+    for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
+     digitalWrite(LEDlevel[level], LOW);
+    }  //change to sides only, mittdle two levels
+   digitalWrite(3,HIGH); 
+   digitalWrite(0,HIGH); 
+   digitalWrite(12,HIGH); 
+   digitalWrite(A1,HIGH);
+   delay(20);
+   digitalWrite(3,LOW); 
+   digitalWrite(0,LOW); 
+   digitalWrite(12,LOW); 
+   digitalWrite(A1,LOW);
+   delay(20);
+   
+    for (level=0; level>4; level++){  //no more ground
+     digitalWrite(LEDlevel[level], HIGH);
+    }
+  
+   
+ }
+ void animation3topbottom(){ 
+       delay(20);
+   digitalWrite(A2, LOW);
+   digitalWrite(A5, LOW);//top and bottom layer are ground now
+   digitalWrite(1,HIGH);
+   digitalWrite(2,HIGH);
+   digitalWrite(4,HIGH);
+   digitalWrite(7,HIGH); 
+   digitalWrite(8,HIGH);
+   digitalWrite(11,HIGH);
+   digitalWrite(13,HIGH);
+   digitalWrite(A0,HIGH);
+       delay(20);
+   digitalWrite(1,LOW);
+   digitalWrite(2,LOW);
+   digitalWrite(4,LOW);
+   digitalWrite(7,LOW); 
+   digitalWrite(8,LOW);
+   digitalWrite(11,LOW);
+   digitalWrite(13,LOW);
+   digitalWrite(A0,LOW);
+ }
