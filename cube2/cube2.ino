@@ -27,7 +27,7 @@ void test(){ // to see if all LEDs are working
       digitalWrite(LEDcol[pin], HIGH);
      }
   level=0;  //maybe not necary
-  while (level>4){ // turn all coums on
+  while (level<4){ // turn all coums on
       
      //set on level as ground
     pinMode(LEDlevel[level],OUTPUT);
