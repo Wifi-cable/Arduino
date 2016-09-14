@@ -1,5 +1,5 @@
 //colums + 
-int LEDcol[]={0,1,2,3,4,5,6,7.8,9,10,11,12,13,A0,A1}; //digital outputs connected to positive or collums of LEDs
+int LEDcol[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,A0,A1}; //digital outputs connected to positive or collums of LEDs
 int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analoge
 int pin,  //output pin for colum in LEDcol array
     fl, //flicker to multiplex
@@ -94,14 +94,21 @@ than turn on 4 to 7(delay and off)
 void animation3(){  //all outside on?
   for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], OUTPUT);
-    
+     
+     for (int m=0; m<11; m++){
+     center3();
+     
+     for(int s=0; s>=10; s++ ){//inner loop to light up corners only
+     animation3side();
+     animation3topbottom();
      }
-   
+    }//end inner loop
+  }//end outer loop
  }  
  void animation3side(){
-    for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
-     digitalWrite(LEDlevel[level], LOW);
-    }  //change to sides only, mittdle two levels
+  digitalWrite(A3, LOW);
+  digitalWrite(A4, LOW); 
+  
    digitalWrite(3,HIGH); 
    digitalWrite(0,HIGH); 
    digitalWrite(12,HIGH); 
@@ -120,24 +127,60 @@ void animation3(){  //all outside on?
    
  }
  void animation3topbottom(){ 
+   
        delay(20);
    digitalWrite(A2, LOW);
    digitalWrite(A5, LOW);//top and bottom layer are ground now
    digitalWrite(1,HIGH);
    digitalWrite(2,HIGH);
    digitalWrite(4,HIGH);
+   
    digitalWrite(7,HIGH); 
    digitalWrite(8,HIGH);
    digitalWrite(11,HIGH);
+   
+   digitalWrite(12,HIGH);
    digitalWrite(13,HIGH);
    digitalWrite(A0,HIGH);
+   digitalWrite(A1,HIGH);
        delay(20);
    digitalWrite(1,LOW);
    digitalWrite(2,LOW);
    digitalWrite(4,LOW);
+   
    digitalWrite(7,LOW); 
    digitalWrite(8,LOW);
    digitalWrite(11,LOW);
+   
+   digitalWrite(12,LOW);
    digitalWrite(13,LOW);
    digitalWrite(A0,LOW);
+   digitalWrite(A1,LOW);
+   
+   
+   digitalWrite(A1,LOW);
+   
+   
+      digitalWrite(A2, HIGH);
+   digitalWrite(A5, HIGH);
  }
+ 
+void center3(){
+  digitalWrite(A3, LOW);
+  digitalWrite(A4, LOW);
+  
+  digitalWrite(5, HIGH); 
+  digitalWrite(6, HIGH); 
+  digitalWrite(9, HIGH); 
+  digitalWrite(10, HIGH); 
+    delay(2000);
+  
+  digitalWrite(5,LOW ); 
+  digitalWrite(6,LOW); 
+  digitalWrite(9,LOW ); 
+  digitalWrite(10, LOW); 
+  
+  digitalWrite(A3,HIGH); 
+  digitalWrite(A4,HIGH); 
+  
+} 
