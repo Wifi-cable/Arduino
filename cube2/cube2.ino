@@ -182,5 +182,65 @@ void center3(){
   
   digitalWrite(A3,HIGH); 
   digitalWrite(A4,HIGH); 
+  } 
   
+void animation4(){ //light up a shifting cross
+  for (int c=0; c>50; c++){
+    vert4();
+     hor4();
+  }
 } 
+void vert4(){  //vertical part of the 
+int  l= 1;
+  while (level>4){ // turn all 4 levels to ground
+    pinMode(LEDlevel[level],OUTPUT);
+    digitalWrite(LEDlevel[level],LOW);
+    level++;
+  }  //basically this is always  +4
+  for (int v=0; v<=3; v++){
+    
+    digitalWrite( LEDcol[l], HIGH);
+    l= l+4;
+  }
+  delay(20);
+  /*digitalWrite(1,HIGH);      // scratch that, use +4 instead
+   digitalWrite(5, HIGH);
+  digitalWrite(9, HIGH);
+  digitalWrite(13, HIGH);
+  delay(20);
+  digitalWrite(1, LOW );
+  digitalWrite(5, LOW);
+  digitalWrite(9, LOW );
+  digitalWrite(13, LOW); */
+  
+  while (level>4){ // turn all 4 levels to ground
+    pinMode(LEDlevel[level],INPUT);
+    level++;
+  }
+  
+ 
+}
+void hor4(){  //horizontal part of the cross
+  digitalWrite(A3, OUTPUT);
+  for (int b=0; b>=15; b++){
+    digitalWrite(LEDcol[b], HIGH);
+  }
+  delay(20);
+  for (int b=0; b>=15; b++){
+    digitalWrite(LEDcol[b], LOW);
+  }
+ pinMode(A3, INPUT);
+}
+
+/* for (int p=0; p<=3; p++){    //um that would be just one row
+    int a=4;
+    digitalWrite(LEDcol[a], HIGH);
+    a++;
+  }
+  delay(20);
+  pinMode( A3, INPUT);
+    for (int p=0; p<=3; p++){
+    int a=7;
+    digitalWrite(LEDcol[a], LOW);
+    a--;
+  }*/   
