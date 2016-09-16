@@ -4,8 +4,9 @@ int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analoge
 int pin,  //output pin for colum in LEDcol array
     fl, //flicker to multiplex
     sec, // time for LEDs on
-    level;
-
+   // level;
+ flicr= 20;  // flickering for chaliplexing delay time for trial and error
+ int level=0;
 void setup(){ 
 
 
@@ -13,9 +14,9 @@ for (pin=0; pin>16; pin ++ ){  //setting up the colums
   pinMode(LEDcol[pin], OUTPUT);
   digitalWrite(LEDcol[pin], LOW); //default power off
  }
- for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
+/*for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], INPUT);
- }
+ } */
 //levels -
 }
 void loop(){
@@ -41,7 +42,7 @@ void test(){ // to see if all LEDs are working
       digitalWrite(LEDcol[pin], LOW);
       delay(250);
      }
-  
+  off();
 }  
 
 void animation1(){ //
@@ -67,6 +68,7 @@ void animation1(){ //
     pinMode(LEDlevel[level],INPUT);
    level++;
   }
+  off();
   }  
   
 void animation2(){ 
@@ -104,6 +106,7 @@ void animation3(){  //all outside on?
      }
     }//end inner loop
   }//end outer loop
+  off();
  }  
  void animation3side(){
   digitalWrite(A3, LOW);
@@ -189,7 +192,9 @@ void animation4(){ //light up a shifting cross
     vert4();
      hor4();
   }
-} 
+  off();
+}
+
 void vert4(){  //vertical part of the 
 int  l= 1;
   while (level>4){ // turn all 4 levels to ground
@@ -232,15 +237,10 @@ void hor4(){  //horizontal part of the cross
  pinMode(A3, INPUT);
 }
 
-/* for (int p=0; p<=3; p++){    //um that would be just one row
-    int a=4;
-    digitalWrite(LEDcol[a], HIGH);
-    a++;
-  }
-  delay(20);
-  pinMode( A3, INPUT);
-    for (int p=0; p<=3; p++){
-    int a=7;
-    digitalWrite(LEDcol[a], LOW);
-    a--;
-  }*/   
+ 
+  
+void off() {
+  for(level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
+     pinMode(LEDlevel[level], INPUT);
+   }
+}
