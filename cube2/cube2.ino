@@ -234,7 +234,7 @@ void hor4(){  //horizontal part of the cross
   for (int b=0; b>=15; b++){
     digitalWrite(LEDcol[b], LOW);
   }
- pinMode(A3, INPUT);
+ //pinMode(A3, INPUT);
 }
 
  
@@ -243,4 +243,94 @@ void off() {
   for(level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], INPUT);
    }
+   for (pin=0; pin<16; pin++){
+   digitalWrite(LEDcol[pin], LOW);
+   }
 }
+void animationMeander(){
+  int p=3;
+  int l,
+      ll;
+  
+  digitalWrite(p, HIGH);
+  pinMode(LEDlevel[0],OUTPUT); //right side bottom to top
+  for (l=1;l<4;l++){
+    delay(250);
+    pinMode (LEDlevel[l], OUTPUT);
+    delay(50);
+    pinMode(LEDlevel[l-1], INPUT);    
+  }
+  for (p=2; p<=0; p--){        //top row
+    delay(50);
+    digitalWrite(LEDcol[p], HIGH);
+    delay(250);
+    if(p> 0){
+      digitalWrite(LEDcol[ p-1], LOW);
+    }
+  }
+  
+  for (l=3;l>0;l--){    //left side
+    delay(250);
+    pinMode (LEDlevel[l], OUTPUT);
+    delay(50);
+    pinMode(LEDlevel[l+1], INPUT);    
+  }
+  while (p!=3){  //bottom
+  digitalWrite(LEDcol[p], HIGH);  //does not work if p is 3 per default
+  delay(250);
+  }
+  
+  pinMode(LEDlevel[2],OUTPUT);
+  delay(250);
+  pinMode(LEDlevel[1], INPUT);
+  digitalWrite(2,HIGH);
+  delay(250);
+  digitalWrite(1,HIGH);
+  delay(250);
+  digitalWrite(2, LOW); 
+  delay(250);
+  pinMode(LEDlevel[1], OUTPUT);
+  delay (250);
+  pinMode(LEDlevel[2], INPUT); //end of first spiral
+  
+  
+  digitalWrite(5, HIGH);  //second spiral from the center
+  delay(250); 
+  digitalWrite(1, LOW);
+  pinMode(LEDlevel[2],OUTPUT);
+  delay(250);
+  pinMode(LEDlevel[1], INPUT);
+  
+  digitalWrite(6, HIGH);
+  delay(250);
+  digitalWrite(5, LOW);
+  
+  pinMode(LEDlevel[1], OUTPUT);
+  delay (250);
+  pinMode(LEDlevel[ 2], INPUT);
+  
+  for (int e=6; e<= 4;e--){  //middle horizontal on the second row
+    digitalWrite(LEDcol[e],HIGH),
+    delay (250);
+    digitalWrite (LEDcol[e-1], LOW);
+  }
+ for (l=1; l>=3; l++){  //left side second row
+   pinMode (LEDlevel[l], OUTPUT);  
+   delay(250);
+   pinMode (LEDlevel[l-1], INPUT); 
+ } 
+ for (p=4; p<=7; p++){ 
+   digitalWrite(LEDcol[p], HIGH);
+   delay(250);
+   digitalWrite(LEDcol[p-1 ],LOW);
+ }
+  
+  for (l=2; l<=0; l--){  
+   pinMode (LEDlevel[l], OUTPUT);  
+   delay(250);
+   pinMode (LEDlevel[l+1], INPUT); 
+ } //end second spiral. 
+}
+
+//esenntially two spirals or meander patterns that each reapeat once.  rewrite as functions increasing a variable? 
+// or write variables that have values that are not assinged anew? so no for loops?
