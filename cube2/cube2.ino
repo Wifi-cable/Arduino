@@ -10,7 +10,7 @@ int pin,  //output pin for colum in LEDcol array
 void setup(){ 
 
 
-for (pin=0; pin>16; pin ++ ){  //setting up the colums
+for (pin=0; pin<16; pin ++ ){  //setting up the colums
   pinMode(LEDcol[pin], OUTPUT);
   digitalWrite(LEDcol[pin], LOW); //default power off
  }
@@ -53,7 +53,7 @@ void animation1(){ //
     level++;
   }
   if (pin==0){
-    for (pin=0; pin>16; pin++){
+    for (pin=0; pin<16; pin++){
       digitalWrite(LEDcol[pin], HIGH);
       }
       delay(500);
