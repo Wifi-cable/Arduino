@@ -87,7 +87,7 @@ than turn on 4 to 7(delay and off)
       
     
   }
-  while (level>4){ //turns everything off
+  while (level<4){ //turns everything off
     pinMode(LEDlevel[level], INPUT);
     level-=level;
   }
