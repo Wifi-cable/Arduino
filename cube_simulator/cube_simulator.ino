@@ -18,5 +18,16 @@ void setup()
 
 void loop()
 {
-  
+  delay(250);
+  for (int cathode=0; cathode<4; digitalWrite(LEDlevel[cathode++],HIGH));
+  delay(250);
+  for (int cathode=0; cathode<4; digitalWrite(LEDlevel[cathode++],LOW));
+  delay(250);
+  for (int cathode=0; cathode<4; pinMode(LEDlevel[cathode++],INPUT));
+  delay(250);
+  for (int cathode=0; cathode<4; digitalWrite(LEDlevel[cathode++],HIGH));
+  delay(250);
+  for (int cathode=0; cathode<4; digitalWrite(LEDlevel[cathode++],LOW));
+  delay(250);
+  for (int cathode=0; cathode<4; pinMode(LEDlevel[cathode++],OUTPUT));
 }
