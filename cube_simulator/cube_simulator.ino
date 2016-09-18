@@ -70,15 +70,16 @@ void loop()
     plane[1]= (n<<8)|(bitreverse(n)>>8);
     plane[2]= ~plane[1];
     plane[3]= ~plane[0];
-    for (unsigned int swaps=0; swaps<40; swaps++)
+    for (unsigned int swaps=0; swaps<20; swaps++)
     {
       for (unsigned int level= 0; level<4; level++)
       {
         planeBinary(plane[level]);
         pinMode(LEDlevel[level], OUTPUT);
         digitalWrite(LEDlevel[level],LOW);
-        delay(2);
+        delay(1);
         pinMode(LEDlevel[level], INPUT);
+        delay(3);
       }
     }
   }
