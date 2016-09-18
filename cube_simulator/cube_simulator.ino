@@ -2,8 +2,6 @@
 int LEDcol[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,A0,A1}; //digital outputs connected to positive or collums of LEDs
 int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analog
 
-int level= 0;
-
 void off()
 {
   for (int anode= 0; anode<16; pinMode(LEDcol[anode++],INPUT));
@@ -60,15 +58,28 @@ void setup()
     digitalWrite(LEDlevel[cathode],LOW);
   }
   delay(1000);
+  for (int cathode=0; cathode<4; pinMode(LEDlevel[cathode++], INPUT));
 }
 
 void loop()
 {
   for (unsigned int n=0; n<256; n++)
   {
-    unsigned int na= (n|bitreverse(n));
-    unsigned int nb= ((n<<8)|(bitreverse(n)>>8));
-    planeBinary(nb);
-    delay(200);
+    unsigned int plane[4];
+    plane[0]= n|bitreverse(n);
+    plane[1]= (n<<8)|(bitreverse(n)>>8);
+    plane[2]= ~plane[1];
+    plane[3]= ~plane[0];
+    for (unsigned int swaps=0; swaps<5; swaps++)
+    {
+      for (unsigned int level= 0; level<4; level++)
+      {
+        planeBinary(plane[level]);
+        pinMode(LEDlevel[level], OUTPUT);
+        digitalWrite(LEDlevel[level],LOW);
+        delay(20);
+        pinMode(LEDlevel[level], INPUT);
+      }
+    }
   }
 }
