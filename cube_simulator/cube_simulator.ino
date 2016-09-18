@@ -10,9 +10,9 @@ void off()
   for (int cathode= 0; cathode<4; pinMode(LEDlevel[cathode++],INPUT));
 }
 
-int bitreverse(int n)
+unsigned int bitreverse(unsigned int n)
 {
-  int r= 0;
+  unsigned int r= 0;
   for (int b=0; b<16; b++)
   {
     r<<=1;
@@ -22,7 +22,7 @@ int bitreverse(int n)
   return r;
 }
 
-void planeBinary(int n)
+void planeBinary(unsigned int n)
 {
   for (int b=0; b<16; b++)
   {
@@ -31,13 +31,13 @@ void planeBinary(int n)
   }
 }
 
-void planeReverse(int n)
+void planeReverse(unsigned int n)
 {
   for (int b=16; b>0; digitalWrite(LEDcol[--b],n&1))
     n>>=1;
 }
 
-void levelBinary(int n)
+void levelBinary(unsigned int n)
 {
   n= ~n;
   for (int l=0; l<4; l++)
@@ -64,9 +64,11 @@ void setup()
 
 void loop()
 {
-  for (int n=0; n<256; n++)
+  for (unsigned int n=0; n<256; n++)
   {
-    planeBinary(n|bitreverse(n));
-    delay(50);
+    unsigned int na= (n|bitreverse(n));
+    unsigned int nb= ((n<<8)|(bitreverse(n)>>8));
+    planeBinary(nb);
+    delay(200);
   }
 }
