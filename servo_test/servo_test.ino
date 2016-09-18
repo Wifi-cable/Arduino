@@ -1,23 +1,24 @@
 #include <Servo.h>
 Servo myservo;
-const int pos_oben = 90;
-const int pos_unten = 0;
+const int max_us= 2400;
+const int min_us= 600;
 
-int pos;
+int us;
 int dir;
 
 void setup()
 {
   myservo.attach(7);
   dir= 0;
-  pos= 90;
-  myservo.write(pos);
+  us= 1500;
+  myservo.writeMicroseconds(us);
 }
 
 void loop()
 {
-  myservo.write(pos);
-  pos+= dir? -1:1;
-  if (pos_oben < pos || pos_unten >pos) dir= !dir;
-  delay(10);
+  myservo.writeMicroseconds(us);
+  us+= dir? -1:1;
+  if (max_us < us) dir= 1;
+  if (min_us > us) dir= 0;
+  delay(4);
 }
