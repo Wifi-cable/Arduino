@@ -77,9 +77,9 @@ void loop()
         planeBinary(plane[level]);
         pinMode(LEDlevel[level], OUTPUT);
         digitalWrite(LEDlevel[level],LOW);
-        delay(1);
-        pinMode(LEDlevel[level], INPUT);
         delay(3);
+        pinMode(LEDlevel[level], INPUT);
+        delay(1);
       }
     }
   }
