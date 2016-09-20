@@ -1,8 +1,11 @@
 //colums + 
-int LEDcol[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,A0,A1}; //digital outputs connected to positive or collums of LEDs
-int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analoge
+int LEDcol[]={1,2,5,6,7,8,9,10,11,12,13,16,19,20}; //digital outputs connected to positive or collums of LEDs
+int LEDlevel[]={A3,A4,A5,A4 };  //4 levels analoge
 int pin,  //output pin for colum in LEDcol array
     fl, //flicker to multiplex
+    a,
+    p,
+    l,
     sec, // time for LEDs on
    // level;
  flicr= 20;  // flickering for chaliplexing delay time for trial and error
@@ -248,9 +251,9 @@ void off() {
    }
 }
 void animationMeander(){
-  int p=3;
-  int l,
-      ll;
+  //int p=3;
+ // int l,
+      //ll;
   
   digitalWrite(p, HIGH);
   pinMode(LEDlevel[0],OUTPUT); //right side bottom to top
@@ -334,3 +337,47 @@ void animationMeander(){
 
 //esenntially two spirals or meander patterns that each reapeat once.  rewrite as functions increasing a variable? 
 // or write variables that have values that are not assinged anew? so no for loops?
+
+int meander( int a ,int l, int p){
+  meander1(a,l,p);
+  meander2(a,l,p);
+}
+
+int meander1(int l, int a, int p){
+    p=3;
+    digitalWrite(p, HIGH);
+    pinMode(LEDlevel[0],OUTPUT); //right side bottom to top
+  for (l=1;l>=3;l++){
+    delay(250);
+    pinMode (LEDlevel[l], OUTPUT);
+    delay(50);
+    pinMode(LEDlevel[l-1], INPUT);    
+  }
+  
+   return a,l,p; 
+}
+int meander2( int a, int l, int p){
+   a=0;
+  while(p!=a){
+    digitalWrite(LEDcol[p],HIGH);
+    delay(250);
+    digitalWrite(LEDcol[p-1],LOW);
+    p--;
+  }
+    return a, l, p;
+}
+
+int meander3( int p,int l, int a){
+  while (l!=1){ 
+   pinMode(LEDlevel[l], OUTPUT);
+   delay(250);
+   pinMode(LEDlevel[l-1],INPUT);
+   l--;
+ }
+   return a, l,p;
+}
+
+int meander4(int l,int a, int p){
+  while(p<3){  //from zero till including two
+      }
+}
