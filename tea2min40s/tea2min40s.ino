@@ -4,7 +4,6 @@ const int max_us= 2400;
 const int min_us= 600;
 
 int us;
-int dir;
 
 inline int sign(int n) {return (n==0? 0 : (n>0? 1 : -1));}
 
@@ -14,36 +13,37 @@ void go(int pos, unsigned int dstep)
   {
     int dir= sign(pos-us);
     us+= dir;
+    if (us > max_us) us= max_us;
+    if (us < min_us) us= min_us;
     myservo.writeMicroseconds(us);
     delay(dstep);
   }
 }
 
-void stir(int lower, int upper, unsigned int cycles, unsigned int dstep)
+void stir(int pos1, int pos2, unsigned int cycles, unsigned int dstep)
 {
   while (cycles-- > 0)
   {
-    go(upper, dstep);
-    go(lower, dstep);
+    go(pos1, dstep);
+    go(pos2, dstep);
   }
 }
 
 void setup()
 {
-  const int raised= 900;
-  const int lower= 1900;
-  const int upper= 1500;
+  const int raised= 800;
+  const int lower= 1600;
+  const int upper= 1400;
   
-  const int cycles= 10;
+  const int cycles= 20;
   
   myservo.attach(7);
-  dir= 0;
   us= raised;
   myservo.writeMicroseconds(us);
-  delay(1000);
+  delay(2000);
 
-  go(upper, 1);
-  stir (lower, upper, cycles, 10);
+  go(lower, 1);
+  stir (upper, lower, cycles, 21);
   go(raised, 1);
 }
 
