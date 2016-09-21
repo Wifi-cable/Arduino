@@ -1,6 +1,6 @@
 //colums + 
-int LEDcol[]={1,2,5,6,7,8,9,10,11,12,13,16,19,20}; //digital outputs connected to positive or collums of LEDs
-int LEDlevel[]={A3,A4,A5,A4 };  //4 levels analoge
+int LEDcol[]={1,2,5,6,7,8,9,10,11,12,13,16,A7,A6}; //digital outputs connected to positive or collums of LEDs
+int LEDlevel[]={A3,A2,A1,A0 };  //4 levels analoge
 int pin,  //output pin for colum in LEDcol array
     fl, //flicker to multiplex
     a,
@@ -13,7 +13,7 @@ int pin,  //output pin for colum in LEDcol array
 void setup(){ 
 
 
-for (pin=0; pin>16; pin ++ ){  //setting up the colums
+for (pin=0; pin<16; pin ++ ){  //setting up the colums
   pinMode(LEDcol[pin], OUTPUT);
   digitalWrite(LEDcol[pin], LOW); //default power off
  }
@@ -23,7 +23,7 @@ for (pin=0; pin>16; pin ++ ){  //setting up the colums
 //levels -
 }
 void loop(){
-  test();
+  arraytest();
 }
 
 void test(){ // to see if all LEDs are working
@@ -31,7 +31,7 @@ void test(){ // to see if all LEDs are working
       digitalWrite(LEDcol[pin], HIGH);
      }
   level=0;  //maybe not necary
-  while (level>4){ // turn all coums on
+  while (level<4){ // turn all coums on
       
      //set on level as ground
     pinMode(LEDlevel[level],OUTPUT);
@@ -49,8 +49,8 @@ void test(){ // to see if all LEDs are working
 }  
 
 void animation1(){ //
-
-  while (level>4){ // turn all coums on
+  level=0;
+  while (level<4){ // turn all coums on
     pinMode(LEDlevel[level],OUTPUT);
     digitalWrite(level, LOW);
     level++;
@@ -62,12 +62,13 @@ void animation1(){ //
       delay(500);
     }
     else{
-   for (pin=16; pin<=0; pin--){
+   for (pin=16; pin!=0; pin--){
      digitalWrite(LEDcol[pin], LOW);
    }
    
    }  //end else
-     while (level>4){ // turn all coums on
+     level=0;
+     while (level<4){ // turn all coums on
     pinMode(LEDlevel[level],INPUT);
    level++;
   }
@@ -77,7 +78,7 @@ void animation1(){ //
 void animation2(){ 
    while (level>4){ // turn all 4 levels to ground
     pinMode(LEDlevel[level],OUTPUT);
-    digitalWrite(LEDlevel[level],LOW);
+    //digitalWrite(LEDlevel[level],LOW);
     level++;
   }
   
@@ -92,18 +93,18 @@ than turn on 4 to 7(delay and off)
   }
   while (level>4){ //turns everything off
     pinMode(LEDlevel[level], INPUT);
-    level-=level;
+    level--;
   }
   }
   
 void animation3(){  //all outside on?
-  for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
+  for (level=0; level<4; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], OUTPUT);
      
      for (int m=0; m<11; m++){
      center3();
      
-     for(int s=0; s>=10; s++ ){//inner loop to light up corners only
+     for(int s=0; s<=10; s++ ){//inner loop to light up corners only
      animation3side();
      animation3topbottom();
      }
@@ -111,7 +112,7 @@ void animation3(){  //all outside on?
   }//end outer loop
   off();
  }  
- void animation3side(){
+ void animation3side(){  //do over  new pins
   digitalWrite(A3, LOW);
   digitalWrite(A4, LOW); 
   
@@ -211,15 +212,7 @@ int  l= 1;
     l= l+4;
   }
   delay(20);
-  /*digitalWrite(1,HIGH);      // scratch that, use +4 instead
-   digitalWrite(5, HIGH);
-  digitalWrite(9, HIGH);
-  digitalWrite(13, HIGH);
-  delay(20);
-  digitalWrite(1, LOW );
-  digitalWrite(5, LOW);
-  digitalWrite(9, LOW );
-  digitalWrite(13, LOW); */
+  
   
   while (level>4){ // turn all 4 levels to ground
     pinMode(LEDlevel[level],INPUT);
@@ -356,7 +349,7 @@ int meander1(int l, int a, int p){
   
    return a,l,p; 
 }
-int meander2( int a, int l, int p){
+int meander2( int a, int l, int p){  //how to call a with different values at times
    a=0;
   while(p!=a){
     digitalWrite(LEDcol[p],HIGH);
@@ -367,7 +360,7 @@ int meander2( int a, int l, int p){
     return a, l, p;
 }
 
-int meander3( int p,int l, int a){
+int meander3( int p,int l, int a){  //1 ersetzen durch was?
   while (l!=1){ 
    pinMode(LEDlevel[l], OUTPUT);
    delay(250);
@@ -378,6 +371,15 @@ int meander3( int p,int l, int a){
 }
 
 int meander4(int l,int a, int p){
-  while(p<3){  //from zero till including two
+  while(p<3){  //from zero till including two for the first time, than call different value for it
       }
+}
+
+void arraytest(){
+  pinMode (LEDlevel[1], OUTPUT);
+  for(int i=0; i>=16; i++){
+    digitalWrite(LEDcol[i],HIGH);
+    delay (1000);
+    digitalWrite(LEDcol[i], LOW);
+  }
 }
