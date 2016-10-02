@@ -11,15 +11,15 @@ void setup(){
  }
 
 void loop(){
- rows();
+ //rows();
   //off();
-  //rows2();
+ rows2();
  off();
  //frame1();
 
 }
 void off(){
-  for(level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
+  for(level=0; level<=3; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], INPUT);
    }
   for (pin=0; pin<16; pin++){
@@ -74,7 +74,10 @@ void rows(){
 
 
 void rows2(){
-  pinMode(18,OUTPUT);
+  //pinMode(18,OUTPUT);
+  for(level=0; level<=3; level++){  //setting the levels up, default is input, or not currently working as ground 
+     pinMode(LEDlevel[level], OUTPUT);
+   }
   int count,
       i,
       pins=0;
@@ -86,29 +89,26 @@ void rows2(){
   for (i=0; i<=3; i++){
     digitalWrite(LEDcol[pins], HIGH);
     delay(100);
-       int p=pins;
-   for (i=4; i>=0; i--){
-     //int p=pins;
-    digitalWrite(LEDcol[p], LOW);
     //digitalWrite(LEDcol[pins], LOW);    //how to make it more like rows?  by not turning it LED after led, instead having a delay where?
     pins=pins+4;
     delay(200);
     
   }
   delay(1000);//start new   um that is bugged. it messes up the pins math.
-  /* int p=pins;
+  int p=pins;
    for (i=4; i>=0; i--){
      //int p=pins;
-    digitalWrite(LEDcol[p], LOW);*/
+    digitalWrite(LEDcol[p], LOW);
      p=p-4;  // um nope. still nope
     //end new
   
 
-  pins=pins-15;
+  //pins=pins-15;
   //subtract 11 from the pin variable subtracting 12 does not work.  that is because the loop keeps counting till it realizes "oh, 4 IS bigger than 3" computers are stupid
   }
-}
-}
+  pins=pins-15;
+} //end big for loop
+} //end rows
 
 void frame(){
   
