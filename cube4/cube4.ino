@@ -13,9 +13,9 @@ void setup(){
 void loop(){
  //rows();
   //off();
- rows2();
+ //rows2();
  off();
- //frame1();
+ frame();
 
 }
 void off(){
@@ -111,11 +111,15 @@ void rows2(){
 } //end rows
 
 void frame(){
+  for (int i=0; i<=20; i++){
+  frame1();
+  frame2();
+  }
   
 }
 
 void frame1(){// top part
- for(level=0; level<=4; level++){   //all levels on
+ for(level=0; level<=3; level++){   //all levels on
      pinMode(LEDlevel[level], OUTPUT);
    }
    int pin=0;
@@ -129,7 +133,7 @@ void frame1(){// top part
       pin=pin+3;
     }
    }
-   delay(20);
+   delay(10);
    for (int i=0; i<=3; i++){
     
     digitalWrite(LEDcol[pin],LOW);
@@ -149,6 +153,15 @@ void frame1(){// top part
  */   
 }
 void frame2(){// off level 1, 2,   pins 1,2,  4,7 ,8,11,  13, 14
-  pinMode(18, INPUT);
-  pinMode(19 ,INPUT);
+  pinMode(LEDlevel[1], INPUT);
+  pinMode(LEDlevel[2], INPUT);
+  int side[]={16,2,4,7,8,11,13,14 };
+  
+  for (int pin=0; pin<=8; pin++){
+    digitalWrite(side[pin], HIGH);
+    }
+     delay(10);
+   for (int pin=0; pin<=8; pin++){
+        digitalWrite(side[pin], LOW);
+    }
 }  
