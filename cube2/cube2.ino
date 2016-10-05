@@ -3,6 +3,9 @@ int LEDcol[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,A0,A1}; //digital outputs connecte
 int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analoge
 int pin,  //output pin for colum in LEDcol array
     fl, //flicker to multiplex
+    a,
+    p,
+    l,
     sec, // time for LEDs on
    // level;
  flicr= 20;  // flickering for chaliplexing delay time for trial and error
@@ -20,7 +23,7 @@ for (pin=0; pin<16; pin ++ ){  //setting up the colums
 //levels -
 }
 void loop(){
-  test();
+  arraytest();
 }
 
 void test(){ // to see if all LEDs are working
@@ -46,7 +49,7 @@ void test(){ // to see if all LEDs are working
 }  
 
 void animation1(){ //
-
+  level=0;
   while (level<4){ // turn all coums on
     pinMode(LEDlevel[level],OUTPUT);
     digitalWrite(level, LOW);
@@ -59,11 +62,12 @@ void animation1(){ //
       delay(500);
     }
     else{
-   for (pin=16; pin<=0; pin--){
+   for (pin=16; pin!=0; pin--){
      digitalWrite(LEDcol[pin], LOW);
    }
    
    }  //end else
+     level=0;
      while (level<4){ // turn all coums on
     pinMode(LEDlevel[level],INPUT);
    level++;
@@ -74,7 +78,7 @@ void animation1(){ //
 void animation2(){ 
    while (level<4){ // turn all 4 levels to ground
     pinMode(LEDlevel[level],OUTPUT);
-    digitalWrite(LEDlevel[level],LOW);
+    //digitalWrite(LEDlevel[level],LOW);
     level++;
   }
   
@@ -89,7 +93,7 @@ than turn on 4 to 7(delay and off)
   }
   while (level<4){ //turns everything off
     pinMode(LEDlevel[level], INPUT);
-    level-=level;
+    level--;
   }
   }
   
@@ -100,7 +104,7 @@ void animation3(){  //all outside on?
      for (int m=0; m<11; m++){
      center3();
      
-     for(int s=0; s>=10; s++ ){//inner loop to light up corners only
+     for(int s=0; s<=10; s++ ){//inner loop to light up corners only
      animation3side();
      animation3topbottom();
      }
@@ -108,7 +112,7 @@ void animation3(){  //all outside on?
   }//end outer loop
   off();
  }  
- void animation3side(){
+ void animation3side(){  //do over  new pins
   digitalWrite(A3, LOW);
   digitalWrite(A4, LOW); 
   
@@ -208,15 +212,7 @@ int  l= 1;
     l= l+4;
   }
   delay(20);
-  /*digitalWrite(1,HIGH);      // scratch that, use +4 instead
-   digitalWrite(5, HIGH);
-  digitalWrite(9, HIGH);
-  digitalWrite(13, HIGH);
-  delay(20);
-  digitalWrite(1, LOW );
-  digitalWrite(5, LOW);
-  digitalWrite(9, LOW );
-  digitalWrite(13, LOW); */
+  
   
   while (level<4){ // turn all 4 levels to ground
     pinMode(LEDlevel[level],INPUT);
@@ -248,9 +244,9 @@ void off() {
    }
 }
 void animationMeander(){
-  int p=3;
-  int l,
-      ll;
+  //int p=3;
+ // int l,
+      //ll;
   
   digitalWrite(p, HIGH);
   pinMode(LEDlevel[0],OUTPUT); //right side bottom to top
@@ -334,3 +330,56 @@ void animationMeander(){
 
 //esenntially two spirals or meander patterns that each reapeat once.  rewrite as functions increasing a variable? 
 // or write variables that have values that are not assinged anew? so no for loops?
+
+int meander( int a ,int l, int p){
+  meander1(a,l,p);
+  meander2(a,l,p);
+}
+
+int meander1(int l, int a, int p){
+    p=3;
+    digitalWrite(p, HIGH);
+    pinMode(LEDlevel[0],OUTPUT); //right side bottom to top
+  for (l=1;l<=3;l++){
+    delay(250);
+    pinMode (LEDlevel[l], OUTPUT);
+    delay(50);
+    pinMode(LEDlevel[l-1], INPUT);    
+  }
+  
+   return a,l,p; 
+}
+int meander2( int a, int l, int p){  //how to call a with different values at times
+   a=0;
+  while(p!=a){
+    digitalWrite(LEDcol[p],HIGH);
+    delay(250);
+    digitalWrite(LEDcol[p-1],LOW);
+    p--;
+  }
+    return a, l, p;
+}
+
+int meander3( int p,int l, int a){  //1 ersetzen durch was?
+  while (l!=1){ 
+   pinMode(LEDlevel[l], OUTPUT);
+   delay(250);
+   pinMode(LEDlevel[l-1],INPUT);
+   l--;
+ }
+   return a, l,p;
+}
+
+int meander4(int l,int a, int p){
+  while(p<3){  //from zero till including two for the first time, than call different value for it
+      }
+}
+
+void arraytest(){
+  pinMode (LEDlevel[1], OUTPUT);
+  for(int i=0; i<=16; i++){
+    digitalWrite(LEDcol[i],HIGH);
+    delay (1000);
+    digitalWrite(LEDcol[i], LOW);
+  }
+}
