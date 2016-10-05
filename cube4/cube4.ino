@@ -5,6 +5,8 @@
 int LEDcol[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,A0,A1}; //digital outputs connected to positive or collums of LEDs
 int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analog
 
+inline int pin(int row, int column) { return (row % 4) * 4 + column % 4; } 
+
 void setup(){
    for(int level=0; level<=3; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], INPUT);
@@ -43,47 +45,19 @@ void off(){
 }
 
 void rows(){
-    for(int level=0; level<=3; level++){  
-     pinMode(LEDlevel[level], OUTPUT);
-   }
-  delay(200);
-  for(int pin=0;pin<=3; pin ++){
-    digitalWrite(LEDcol[pin], HIGH);
-    delay(500);
+  for(int level=0; level<=3; level++){  
+    pinMode(LEDlevel[level], OUTPUT);
   }
-  delay (1000);
-  
-  for(int pin=0;pin<=3; pin ++){
-    digitalWrite(LEDcol[pin], LOW);
-
-  }
-  delay(200);
-  
-  for (int pin=4; pin<=7; pin++){  
-    digitalWrite(LEDcol[pin], HIGH);
-    delay(500);
-  }
-  delay(1000);
-    for (int pin=4; pin<=7; pin++){
-      digitalWrite(LEDcol[pin], LOW);
-  }
-  delay(200);
-    for (int pin=8; pin<=11; pin++){    
-      digitalWrite(LEDcol[pin], HIGH);
+  for(int row= 0; row<=3; row++){
+    delay(200);
+    for(int column=0; column<=3; column ++){
+      digitalWrite(LEDcol[pin(row,column)], HIGH);
       delay(500);
-  }
-  delay(1000);
-    for (int pin=8; pin<=11; pin++){
-      digitalWrite(LEDcol[pin], LOW);
-  }
-  delay(200);
-    for (int pin=12; pin<=15; pin++){
-      digitalWrite(LEDcol[pin], HIGH);
-      delay(500);
-  }
-  delay (1000);
-    for (int pin=12; pin<=15; pin++){
-      digitalWrite(LEDcol[pin], LOW);
+    }
+    delay (1000);
+    for(int column=0; column<=3; column ++){
+      digitalWrite(LEDcol[pin(row,column)], LOW);
+    }
   }
 }
 
