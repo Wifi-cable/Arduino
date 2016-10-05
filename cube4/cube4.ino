@@ -5,7 +5,10 @@
 int LEDcol[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,A0,A1}; //digital outputs connected to positive or collums of LEDs
 int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analog
 
-inline int pin(int row, int column) { return (row % 4) * 4 + column % 4; } 
+// inline int pin(int row, int column) { return (row % 4) * 4 + column % 4; }
+// Boolean logic operations are cheaper than modulo arithmetic 
+// (unless the compiler is smart enough to make the substitution itself)
+inline int pin(int row, int column) { return (row & 3) << 2 | column & 3; } 
 
 void setup(){
    for(int level=0; level<=3; level++){  //setting the levels up, default is input, or not currently working as ground 
