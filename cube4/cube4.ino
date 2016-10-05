@@ -1,5 +1,8 @@
-int LEDcol[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,A0,A1}; //digital outputs connected to positive or collums of LEDs
+//int LEDcol[]={1, 16,2,3,4,5,6,7,8,9,10,11,12,13,14,15 }; // Mary's cube
+//int side[]={16,2,4,7,8,11,13,14 }; // Mary's side[] array
+//int side[]={1,2,4,7,8,11,13,14}; // side[] translated to LEDcol[] indices
 
+int LEDcol[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,A0,A1}; //digital outputs connected to positive or collums of LEDs
 int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analog
 int level,
     pin;
@@ -12,7 +15,7 @@ void setup(){
 
   for (int pin=0; pin<=15; pin++){  //setting up the colums
      pinMode(LEDcol[pin], OUTPUT);
-     digitalWrite(LEDlevel[level], LOW);
+     digitalWrite(LEDcol[pin], LOW);
    }
  }
 
@@ -170,14 +173,15 @@ void frame1(){// top part
 void frame2(){// off level 1, 2,   pins 1,2,  4,7 ,8,11,  13, 14
   pinMode(LEDlevel[1], INPUT);
   pinMode(LEDlevel[2], INPUT);
-  int side[]={16,2,4,7,8,11,13,14 };
+int side[]={1,2,4,7,8,11,13,14};
+//int side[]={16,2,4,7,8,11,13,14 };
   
-  for (int pin=0; pin<=8; pin++){
-    digitalWrite(side[pin], HIGH);
+  for (int pos=0; pos<=8; pos++){
+    digitalWrite(LEDcol[side[pos]], HIGH);
     }
      delay(5);
-   for (int pin=0; pin<=8; pin++){
-        digitalWrite(side[pin], LOW);
+   for (int pos=0; pos<=8; pos++){
+        digitalWrite(LEDcol[side[pos]], LOW);
     }
 }  
 void stripes(){
