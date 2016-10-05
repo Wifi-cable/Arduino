@@ -61,43 +61,22 @@ void rows(){
   }
 }
 
-
 void rows2(){
-  //pinMode(18,OUTPUT);
-  for(int level=0; level<=3; level++){  //setting the levels up, default is input, or not currently working as ground 
-     pinMode(LEDlevel[level], OUTPUT);
-   }
-  int count,
-      i,
-      pins=0;
-  for (count=0; count<=3; count++){//repeat four times
- /* three times  second counter variable
- 
- add 4  to the variable used for the pin
- third variable used for this, not the counter of either*/
-  for (i=0; i<=3; i++){
-    digitalWrite(LEDcol[pins], HIGH);
-    delay(200);
-    //digitalWrite(LEDcol[pins], LOW);    
-    pins=pins+4;
-    delay(200);
-    
+  for(int level=0; level<=3; level++){  
+    pinMode(LEDlevel[level], OUTPUT);
   }
-  pins=pins-4;
-  delay(1000);//start new   um that is bugged. it messes up the pins math.
-  int p=pins;
-   for (i=4; i>=0; i--){
-     //int p=pins;
-    digitalWrite(LEDcol[p], LOW);
-     p=p-4;  
-    //end new
-  
-
-  
+  for(int column=0; column<=3; column ++){
+    delay(200);
+    for(int row= 0; row<=3; row++){
+      digitalWrite(LEDcol[pin(row,column)], HIGH);
+      delay(500);
+    }
+    delay (1000);
+    for(int row= 0; row<=3; row++){
+      digitalWrite(LEDcol[pin(row,column)], LOW);
+    }
   }
-  pins=pins-11;
-} //end big for loop
-} //end rows
+}
 
 void frame(){
   for (int j=0; j<=8;j++){
