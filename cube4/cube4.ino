@@ -1,6 +1,6 @@
-int LEDcol[]={1, 16,2,3,4,5,6,7,8,9,10,11,12,13,14,15 };
+int LEDcol[]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,A0,A1}; //digital outputs connected to positive or collums of LEDs
 
-int LEDlevel[]={18,0, 17,19};
+int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analog
 int level,
     pin;
 
