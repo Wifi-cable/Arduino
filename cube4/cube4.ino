@@ -5,23 +5,37 @@ int level,
     pin;
 
 void setup(){
+   for(level=0; level<=3; level++){  //setting the levels up, default is input, or not currently working as ground 
+     pinMode(LEDlevel[level], INPUT);
+     digitalWrite(LEDlevel[level], LOW);
+   }  //input pull up? pull down? low for savty reasons?
+
   for (int pin=0; pin<=15; pin++){  //setting up the colums
-    pinMode(LEDcol[pin], OUTPUT);
+     pinMode(LEDcol[pin], OUTPUT);
+     digitalWrite(LEDlevel[level], LOW);
    }
  }
 
 void loop(){
- //rows();
-  //off();
- //rows2();
- off();
- frame();
+  setup();
+  rows();
+  off();
+  delay(500);
+  rows2();
+  off(); 
+  delay(500);
+  frame();
+  off(); 
+  delay(500);
+  stripes();
+  off();
+  delay(3000); 
 
 }
 void off(){
   for(level=0; level<=3; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], INPUT);
-   }
+   }  //input pull up? pull down? low for savty reasons?
   for (pin=0; pin<16; pin++){
      digitalWrite(LEDcol[pin], LOW);
    }
@@ -88,34 +102,38 @@ void rows2(){
  third variable used for this, not the counter of either*/
   for (i=0; i<=3; i++){
     digitalWrite(LEDcol[pins], HIGH);
-    delay(100);
-    //digitalWrite(LEDcol[pins], LOW);    //how to make it more like rows?  by not turning it LED after led, instead having a delay where?
+    delay(200);
+    //digitalWrite(LEDcol[pins], LOW);    
     pins=pins+4;
     delay(200);
     
   }
+  pins=pins-4;
   delay(1000);//start new   um that is bugged. it messes up the pins math.
   int p=pins;
    for (i=4; i>=0; i--){
      //int p=pins;
     digitalWrite(LEDcol[p], LOW);
-     p=p-4;  // um nope. still nope
+     p=p-4;  
     //end new
   
 
-  //pins=pins-15;
-  //subtract 11 from the pin variable subtracting 12 does not work.  that is because the loop keeps counting till it realizes "oh, 4 IS bigger than 3" computers are stupid
+  
   }
-  pins=pins-15;
+  pins=pins-11;
 } //end big for loop
 } //end rows
 
 void frame(){
-  for (int i=0; i<=20; i++){
+  for (int j=0; j<=8;j++){
+  for (int i=0; i<=150; i++){
   frame1();
   frame2();
   }
-  
+  off();
+  center();
+  off();
+  }
 }
 
 void frame1(){// top part
@@ -133,11 +151,11 @@ void frame1(){// top part
       pin=pin+3;
     }
    }
-   delay(10);
+   delay(5);
+   pin=0;
    for (int i=0; i<=3; i++){
     
     digitalWrite(LEDcol[pin],LOW);
-      
     
     if (pin%2==1){// high 0, 3,12,15 hopefully
       pin=pin+9;
@@ -148,9 +166,6 @@ void frame1(){// top part
     }
    }  
    //delay(200);
-// and off again. same loops if they work? just with LOW?
- /* why is it not working yet? the code keept resetting it. fixed.
- */   
 }
 void frame2(){// off level 1, 2,   pins 1,2,  4,7 ,8,11,  13, 14
   pinMode(LEDlevel[1], INPUT);
@@ -160,8 +175,51 @@ void frame2(){// off level 1, 2,   pins 1,2,  4,7 ,8,11,  13, 14
   for (int pin=0; pin<=8; pin++){
     digitalWrite(side[pin], HIGH);
     }
-     delay(10);
+     delay(5);
    for (int pin=0; pin<=8; pin++){
         digitalWrite(side[pin], LOW);
     }
 }  
+void stripes(){
+  for(int i=0; i<=15; i++){
+    digitalWrite(LEDcol[i], HIGH);
+  }
+  for (int l=0; l<=3; l++){
+    pinMode(LEDlevel[l], OUTPUT);
+    delay(600);
+    pinMode(LEDlevel[l], INPUT);
+  }
+  delay(500);
+  for (int l=3; l>=0; l--){
+    pinMode(LEDlevel[l], OUTPUT);
+    delay(600);
+    pinMode(LEDlevel[l], INPUT);
+  }
+  
+}
+
+void center(){
+ pinMode(LEDlevel[1],OUTPUT);
+ pinMode(LEDlevel[2],OUTPUT);
+   int p=5;
+  while(p<11){
+    digitalWrite(LEDcol[p], HIGH);
+    if(p%2==0){
+      p=p+3;
+    }
+    else{
+      p=p+1;
+    }
+    
+  }
+  delay(1000);
+}
+
+void varp(){
+  
+}
+void varp1() {
+  pinMode(LEDlevel[1],OUTPUT);
+}
+void varp2(){
+}
