@@ -5,23 +5,25 @@ int LEDlevel[]={A2,A3,A4,A5 };  //4 levels analog
 int level,
     pin;
 
-void setup(){
-for (int pin=0; pin<=15; pin++){  //setting up the colums
-  pinMode(LEDcol[pin], OUTPUT);
- 
-  
+void setup()
+{
+    for (int pin=0; pin<=15; pin++)
+    {  //setting up the colums
+	pinMode(LEDcol[pin], OUTPUT);
   //pinMode(3, OUTPUT);
   //pinMode(4,OUTPUT);
   //digitalWrite(LEDcol[pin], LOW); //default power off
- }
+    }
 /*for (level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
      pinMode(LEDlevel[level], INPUT);
  } */
 //levels -
 }
-void loop(){
-  pinTest();
-  off();
+
+void loop()
+{
+    pinTest();
+    off();
 /* arraytest();
  off();
  test2();
@@ -33,6 +35,7 @@ void loop(){
  // test3();
   //animation6(); */
 }
+
 void arraytest(){
   pinMode (LEDlevel[3], OUTPUT);
   pinMode(LEDlevel[2], OUTPUT);
@@ -205,27 +208,33 @@ void test3(){
   }
   off();
   }  
-  void off() {
-  for(level=0; level>4; level++){  //setting the levels up, default is input, or not currently working as ground 
-     pinMode(LEDlevel[level], INPUT);
-     digitalWrite(LEDlevel[level],LOW);
-   }
-   for (pin=0; pin<16; pin++){
-   digitalWrite(LEDcol[pin], LOW);
-   }
-}
- void pinTest(){
-  for (int z=0; z<=3; z++){
-    pinMode(LEDlevel[z], OUTPUT);
-    
-    for(int y=0; y<=15; y++){
-      digitalWrite(LEDcol[y], HIGH);
-      delay(500);
-      digitalWrite(LEDcol[y], LOW);
-      delay(250);
+
+void off() 
+{
+    for(int level=0; level<4; level++)
+    {  //setting the levels up, default is input, or not currently working as ground 
+	pinMode(LEDlevel[level], INPUT);
+	digitalWrite(LEDlevel[level],LOW);
     }
-    
-    pinMode(LEDcol[z], INPUT);
-    delay(250);
-  }
+    for (int pin=0; pin<16; pin++)
+    {
+	digitalWrite(LEDcol[pin], LOW);
+    }
+}
+
+void pinTest()
+{
+    for (int z=0; z<=3; z++)
+    {
+	pinMode(LEDlevel[z], OUTPUT);
+	for(int y=0; y<=15; y++)
+	{
+	    digitalWrite(LEDcol[y], HIGH);
+	    delay(500);
+	    digitalWrite(LEDcol[y], LOW);
+	    delay(250);
+	}
+	pinMode(LEDlevel[z], INPUT);
+	delay(250);
+    }
 }
